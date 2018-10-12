@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /* Window Class
  * No description yet
@@ -7,6 +8,7 @@ import java.awt.*;
 
 class Window extends JFrame {
     JPanel boardpanel, resetpanel;
+    JButton resetbutton;
     
     public Window () {
         // create window
@@ -44,9 +46,17 @@ class Window extends JFrame {
         resetpanel.setBackground(Color.LIGHT_GRAY);
         
         // create and add resetbutton
-        JButton resetbutton = new JButton("R");
+        resetbutton = new JButton("R");
         resetbutton.setMargin(new Insets(0,0,0,0));
         resetbutton.setPreferredSize(new Dimension(45,45));
+        // add reset functionality to button
+        resetbutton.addActionListener(
+            new AbstractAction("reset") {
+                public void actionPerformed(ActionEvent e) {
+                    Minesweeper.newBoard();
+                }
+            }
+        );
         resetpanel.add(resetbutton,BorderLayout.CENTER);
         
         return resetpanel;
@@ -63,6 +73,9 @@ class Window extends JFrame {
     
     
     public void resetBoard(int height, int width) {
+        // reset resetButton
+        resetbutton.setText("R");
+        
         // clear board panel and change grid and size for new dimensions
         boardpanel.removeAll();
         boardpanel.setLayout(new GridLayout(height, width));
@@ -74,6 +87,16 @@ class Window extends JFrame {
                 boardpanel.add(new BoardButton(r,c));
             }
         }
+        pack();
+    }
+    
+    public void gameWon() {
+        resetbutton.setText("WIN!");
+        pack();
+    }
+    
+    public void gameLost() {
+        resetbutton.setText("LOSE");
         pack();
     }
 }

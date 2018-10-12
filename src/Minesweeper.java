@@ -7,7 +7,7 @@ import java.util.Random;
 class Minesweeper {
     static int height = 8;
     static int width = 8;
-    static int mines = 20;
+    static int mines = 10;
     static int remaining;
     static Boolean gameOver;
     static Cell[][] board;
@@ -90,10 +90,12 @@ class Minesweeper {
     
     
     private static void lose() {
+        gui.gameLost();
         System.out.println("lose");
         gameOver = true;
     }
     private static void win() {
+        gui.gameWon();
         System.out.println("win");
         gameOver = true;
     }
