@@ -34,7 +34,15 @@ class Window extends JFrame {
         JMenu menu = new JMenu("Options");
         menuBar.add(menu);
         
+        Window w = this;
         JMenuItem menuItem = new JMenuItem("new...");
+        menuItem.addActionListener(
+            new AbstractAction("new") {
+                public void actionPerformed(ActionEvent e) {
+                    Dialog dialog = new Dialog(w);
+                }
+            }
+        );
         menu.add(menuItem);
         
         return menuBar;

@@ -7,7 +7,7 @@ import java.awt.event.*;
  */
 
 class BoardButton extends JButton implements MouseListener {
-    int r, c;
+    int r, c; // row and column coordinates of this button in board
     static final Color defaultcolor = new JButton().getBackground();
     
     public BoardButton (int row, int col) {
@@ -24,6 +24,7 @@ class BoardButton extends JButton implements MouseListener {
     }
     
     public void mouseClicked(MouseEvent e) {
+        // button has been clicked, reveal or flag?
         if (e.getButton() == MouseEvent.BUTTON1) {
             Minesweeper.reveal(r,c);
         }
@@ -38,6 +39,7 @@ class BoardButton extends JButton implements MouseListener {
     
     
     public void updateDisplay(Cell cell) {
+        // set button display according to cell properties
         if (cell.isRevealed()) {
             setEnabled(false);
             if (cell.isMine()) {
