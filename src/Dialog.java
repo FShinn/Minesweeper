@@ -51,13 +51,19 @@ class Dialog extends JDialog {
         confirmPanel = new JPanel();
         confirmPanel.setBackground(Color.LIGHT_GRAY);
         
+        Dialog d = this;
+        
         // create and add confirmbutton
         JButton confirmbutton = new JButton("OK");
         // add reset functionality to button
         confirmbutton.addActionListener(
             new AbstractAction("newGame") {
                 public void actionPerformed(ActionEvent e) {
-                    Minesweeper.newBoard();
+                    int h = Integer.parseInt(height.getText());
+                    int w = Integer.parseInt(width.getText());
+                    int m = Integer.parseInt(mines.getText());
+                    Minesweeper.newBoard(h,w,m);
+                    d.dispose();
                 }
             }
         );
@@ -69,7 +75,7 @@ class Dialog extends JDialog {
         cancelbutton.addActionListener(
             new AbstractAction("Cancel") {
                 public void actionPerformed(ActionEvent e) {
-                    Minesweeper.newBoard();
+                    d.dispose();
                 }
             }
         );
