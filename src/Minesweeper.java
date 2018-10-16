@@ -1,7 +1,10 @@
 import java.util.Random;
 
 /* Minesweeper Class
- * No description yet
+ * 
+ * Main class for the Minesweeper program
+ * This class holds data and methods for the logic and management of
+ * the core Minesweeper components. 
  */
 
 class Minesweeper {
@@ -14,12 +17,14 @@ class Minesweeper {
     static Window gui;
     
     public static void main (String[] args) {
+        // instanciates the GUI and starts a new game
         gui = new Window();
         newBoard();
     }
     
     
     public static void newBoard(int h, int w, int m) {
+        // wrapper for newBoard with new properties
         height = h; 
         width = w; 
         mines = m;
@@ -62,6 +67,7 @@ class Minesweeper {
     
     
     public static void reveal(int row, int col) {
+        // logic for revealing a targeted cell
         if (board[row][col].isRevealed() || gameOver) {
             return;
         }
@@ -82,19 +88,23 @@ class Minesweeper {
         }
     }
     public static void toggleFlag(int r, int c) {
+        // flags a targeted cell
         board[r][c].toggleFlag();
     }
     public static void attachDisplay(BoardButton b, int r, int c) {
+        // attaches display object BoardButton to logical Cell object
         board[r][c].attachDisplay(b);
     }
     
     
     private static void lose() {
+        // game logic for when game is lost
         gui.gameLost();
         System.out.println("lose");
         gameOver = true;
     }
     private static void win() {
+        // game logic for when game is won
         gui.gameWon();
         System.out.println("win");
         gameOver = true;
