@@ -87,7 +87,7 @@ class Window extends JFrame {
         // clear board panel and change grid and size for new dimensions
         boardpanel.removeAll();
         boardpanel.setLayout(new GridLayout(height, width));
-        boardpanel.setPreferredSize(new Dimension(25*height,25*width));
+        boardpanel.setPreferredSize(new Dimension(25*width,25*height));
         
         // reset BoardButton IDs and place new buttons into board
         for (int r=0; r<height; r++) {

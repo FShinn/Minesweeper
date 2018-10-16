@@ -22,7 +22,7 @@ class Minesweeper {
     public static void newBoard(int h, int w, int m) {
         height = h; 
         width = w; 
-        m = mines;
+        mines = m;
         newBoard();
     }
     public static void newBoard() {
