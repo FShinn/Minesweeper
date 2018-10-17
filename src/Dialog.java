@@ -10,6 +10,8 @@ import javax.swing.border.*;
  * 
  * TODO:
  * Again, should probably by containing JDialog instead of extending it.
+ *
+ * Data protection
  */
 
 class Dialog extends JDialog {

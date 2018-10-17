@@ -17,6 +17,8 @@ import java.awt.event.*;
  *  and discard r and c values.
  * 
  * Should we "extend JButton", or should we "contain a JButton" ? Hmm...
+ *
+ * Data protection
  */
 
 class BoardButton extends JButton implements MouseListener {

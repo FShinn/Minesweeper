@@ -11,6 +11,8 @@ import java.awt.event.*;
  * 
  * TODO:
  * Should probably convert from "extending JFrame" to "containing JFrame"
+ *
+ * Data protection
  */
 
 class Window extends JFrame {

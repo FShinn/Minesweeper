@@ -5,6 +5,9 @@ import java.util.Random;
  * Main class for the Minesweeper program
  * This class holds data and methods for the logic and management of
  * the core Minesweeper components. 
+ *
+ * TODO:
+ * Put protections on data in this class
  */
 
 class Minesweeper {
