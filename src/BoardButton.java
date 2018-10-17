@@ -3,7 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 /* BoardButton Class
- * No description yet
+ * 
+ * This class extends JButton and is therefore instances of this class are the
+ *  buttons which comprise the Minesweeper game board.
+ * This class contains row and column data to identify the button's coordinates.
+ * This class also implements MouseListener, which provides the functionality for the
+ *  button.
  */
 
 class BoardButton extends JButton implements MouseListener {
