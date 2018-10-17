@@ -4,7 +4,12 @@ import java.awt.event.*;
 import javax.swing.border.*;
 
 /* Dialog Class
- * No description yet
+ * 
+ * This class is for instanciating JDialog objects which serve as the board config.
+ * It is instanciated whenever the user selects "new..." from the options menu.
+ * 
+ * TODO:
+ * Again, should probably by containing JDialog instead of extending it.
  */
 
 class Dialog extends JDialog {
