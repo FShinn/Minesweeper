@@ -9,6 +9,14 @@ import java.awt.event.*;
  * This class contains row and column data to identify the button's coordinates.
  * This class also implements MouseListener, which provides the functionality for the
  *  button.
+ * 
+ * TODO: 
+ * r and c only get used in the implementation of mouselistener.
+ * Instead of storing r and c and implementing MouseListener,
+ *  The constructor should attach an anon MouseListener impelementation
+ *  and discard r and c values.
+ * 
+ * Should we "extend JButton", or should we "contain a JButton" ? Hmm...
  */
 
 class BoardButton extends JButton implements MouseListener {

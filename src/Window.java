@@ -8,6 +8,9 @@ import java.awt.event.*;
  * It is the primary window and manager of the GUI for Minesweeper.
  * Its primary responsibility is to set all the internal properties of a JFrame
  * object to the desired settings for the Minesweeper program.
+ * 
+ * TODO:
+ * Should probably convert from "extending JFrame" to "containing JFrame"
  */
 
 class Window extends JFrame {
