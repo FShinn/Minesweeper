@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 /* Window Class
- * No description yet
+ * 
+ * An instance of this Window class is an object of JFrame type.
+ * It is the primary window and manager of the GUI for Minesweeper.
+ * Its primary responsibility is to set all the internal properties of a JFrame
+ * object to the desired settings for the Minesweeper program.
  */
 
 class Window extends JFrame {
@@ -29,14 +33,17 @@ class Window extends JFrame {
     }
     
     private JMenuBar createMenuBar() {
+        // create menu bar 
         JMenuBar menuBar = new JMenuBar();
         
+        // add options menu to menu bar
         JMenu menu = new JMenu("Options");
         menuBar.add(menu);
         
+        // add "new..." button to options menu
         Window w = this;
         JMenuItem menuItem = new JMenuItem("new...");
-        menuItem.addActionListener(
+        menuItem.addActionListener(  // "new..." button functionality 
             new AbstractAction("new") {
                 public void actionPerformed(ActionEvent e) {
                     Dialog dialog = new Dialog(w);
@@ -57,8 +64,7 @@ class Window extends JFrame {
         resetbutton = new JButton("R");
         resetbutton.setMargin(new Insets(0,0,0,0));
         resetbutton.setPreferredSize(new Dimension(45,45));
-        // add reset functionality to button
-        resetbutton.addActionListener(
+        resetbutton.addActionListener( // reset button functionality 
             new AbstractAction("reset") {
                 public void actionPerformed(ActionEvent e) {
                     Minesweeper.newBoard();
@@ -81,6 +87,7 @@ class Window extends JFrame {
     
     
     public void resetBoard(int height, int width) {
+        // Minesweeper class calls this function when reseting the game/board
         // reset resetButton
         resetbutton.setText("R");
         
@@ -99,11 +106,13 @@ class Window extends JFrame {
     }
     
     public void gameWon() {
+        // call gameWon() to update display to indicate the game is won
         resetbutton.setText("WIN!");
         pack();
     }
     
     public void gameLost() {
+        // call gameLost() to update display to indicate the game is lost
         resetbutton.setText("LOSE");
         pack();
     }
