@@ -4,54 +4,46 @@ import java.awt.event.*;
 
 /* BoardButton Class
  * 
- * This class extends JButton and is therefore instances of this class are the
+ * This class extends JButton and therefore instances of this class are the
  *  buttons which comprise the Minesweeper game board.
- * This class contains row and column data to identify the button's coordinates.
- * This class also implements MouseListener, which provides the functionality for the
- *  button.
+ * The constructor for this class requires row and column data to identify the
+ *  button's coordinates.
  * 
- * TODO: 
- * r and c only get used in the implementation of mouselistener.
- * Instead of storing r and c and implementing MouseListener,
- *  The constructor should attach an anon MouseListener impelementation
- *  and discard r and c values.
- * 
- * Should we "extend JButton", or should we "contain a JButton" ? Hmm...
- *
- * Data protection
+ * This class must extend JButton rather than contain it because it must be
+ *  considered as a JButton by the JPanel class containing it, specifically the 
+ *  instance named 'boardpanel" in the GUI class.
+ * A JButton 'as is' would not do either, as we need the added functionality given by
+ *  the updateDisplay(..) function supplied here by the BoardButton class.
  */
 
-class BoardButton extends JButton implements MouseListener {
-    int r, c; // row and column coordinates of this button in board
-    static final Color defaultcolor = new JButton().getBackground();
+class BoardButton extends JButton {
+    private static final Color DEFAULTCOLOR = new JButton().getBackground();
     
     public BoardButton (int row, int col) {
         // create the button
         super();
         setMargin(new Insets(0,0,0,0));
-        addMouseListener(this);
         
-        // set row and col identifiers for button
-        r = row;
-        c = col;
+        // add button functionality
+        addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                // button has been clicked, reveal or flag?
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    Minesweeper.reveal(row,col);
+                }
+                else if (e.getButton() == MouseEvent.BUTTON3) {
+                    Minesweeper.toggleFlag(row,col);
+                }
+            }
+            public void mouseEntered(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {}
+        });
         
-        Minesweeper.attachDisplay(this, r, c);
+        // attach this BoardButton to corresponding cell via Minesweeper class
+        Minesweeper.attachDisplay(this, row, col);
     }
-    
-    public void mouseClicked(MouseEvent e) {
-        // button has been clicked, reveal or flag?
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            Minesweeper.reveal(r,c);
-        }
-        else if (e.getButton() == MouseEvent.BUTTON3) {
-            Minesweeper.toggleFlag(r,c);
-        }
-    }
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    
     
     public void updateDisplay(Cell cell) {
         // set button display according to cell properties
@@ -70,7 +62,7 @@ class BoardButton extends JButton implements MouseListener {
                 setBackground(Color.ORANGE);
             }
             else {
-                setBackground(defaultcolor);
+                setBackground(DEFAULTCOLOR);
             }
         }
     }
