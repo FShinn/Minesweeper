@@ -1,41 +1,35 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.border.*;
 
-/* Window Class
- * 
- * An instance of this Window class is an object of JFrame type.
- * It is the primary window and manager of the GUI for Minesweeper.
- * Its primary responsibility is to set all the internal properties of a JFrame
- * object to the desired settings for the Minesweeper program.
- * 
- * TODO:
- * Should probably convert from "extending JFrame" to "containing JFrame"
+/* GUI Class
  *
- * Data protection
+ * An instance of this GUI class contains the main window, a JFrame object.
+ * It manages the GUI for Minesweeper.
  */
 
-class Window extends JFrame {
-    JPanel boardpanel, resetpanel;
-    JButton resetbutton;
+class GUI {
+    private JFrame window;
+    private JPanel boardpanel;
+    private JButton resetbutton;
     
-    public Window () {
+    public GUI () {
         // create window
-        super("Minesweeper");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window = new JFrame("Minesweeper");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
         
         // menu bar
-        setJMenuBar(createMenuBar());
+        window.setJMenuBar(createMenuBar());
         
         // add content
-        getContentPane().add(createResetPanel(),BorderLayout.PAGE_START);
-        getContentPane().add(createBoardPanel(),BorderLayout.CENTER);
+        window.getContentPane().add(createResetPanel(),BorderLayout.PAGE_START);
+        window.getContentPane().add(createBoardPanel(),BorderLayout.CENTER);
         
         // display window
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        window.pack();
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
     
     private JMenuBar createMenuBar() {
@@ -47,12 +41,11 @@ class Window extends JFrame {
         menuBar.add(menu);
         
         // add "new..." button to options menu
-        Window w = this;
         JMenuItem menuItem = new JMenuItem("new...");
         menuItem.addActionListener(  // "new..." button functionality 
             new AbstractAction("new") {
                 public void actionPerformed(ActionEvent e) {
-                    Dialog dialog = new Dialog(w);
+                    Dialog dialog = new Dialog(window);
                 }
             }
         );
@@ -63,15 +56,12 @@ class Window extends JFrame {
     
     private JPanel createResetPanel() {
         // create panel
-        resetpanel = new JPanel();
-        resetpanel.setBackground(Color.LIGHT_GRAY);
+        JPanel resetpanel = new JPanel();
         
         // create and add resetbutton
-        resetbutton = new JButton("R");
-        resetbutton.setMargin(new Insets(0,0,0,0));
-        resetbutton.setPreferredSize(new Dimension(32,32));
+        resetbutton = new JButton("NEW");
         resetbutton.addActionListener( // reset button functionality 
-            new AbstractAction("reset") {
+            new AbstractAction("new") {
                 public void actionPerformed(ActionEvent e) {
                     Minesweeper.newBoard();
                 }
@@ -85,7 +75,6 @@ class Window extends JFrame {
     private JPanel createBoardPanel() {
         // create panel
         boardpanel = new JPanel();
-        boardpanel.setBackground(Color.LIGHT_GRAY);
         
         // board details will be updated by Minesweeper.newGame()
         return boardpanel;
@@ -95,12 +84,12 @@ class Window extends JFrame {
     public void resetBoard(int height, int width) {
         // Minesweeper class calls this function when reseting the game/board
         // reset resetButton
-        resetbutton.setText("R");
+        resetbutton.setText("NEW");
         
         // clear board panel and change grid and size for new dimensions
         boardpanel.removeAll();
         boardpanel.setLayout(new GridLayout(height, width));
-        boardpanel.setPreferredSize(new Dimension(16*width,16*height));
+        boardpanel.setPreferredSize(new Dimension(20*width,20*height));
         
         // reset BoardButton IDs and place new buttons into board
         for (int r=0; r<height; r++) {
@@ -108,19 +97,19 @@ class Window extends JFrame {
                 boardpanel.add(new BoardButton(r,c));
             }
         }
-        pack();
+        window.pack();
     }
     
     public void gameWon() {
         // call gameWon() to update display to indicate the game is won
         resetbutton.setText("WIN!");
-        pack();
+        window.pack();
     }
     
     public void gameLost() {
         // call gameLost() to update display to indicate the game is lost
         resetbutton.setText("LOSE");
-        pack();
+        window.pack();
     }
 }
 

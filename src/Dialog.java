@@ -18,7 +18,7 @@ class Dialog extends JDialog {
     JPanel inputPanel, confirmPanel;
     JTextField height,width,mines;
     
-    public Dialog (Window owner) {
+    public Dialog (JFrame owner) {
         // create dialog
         super(owner, "Settings");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

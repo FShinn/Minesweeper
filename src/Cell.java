@@ -6,8 +6,6 @@
  *
  * A corresponding display of type BoardButton should be attached to each
  * Cell instance, which will be updated when the Cell instance changes.
- *
- * Data protection
  */
 
 class Cell {

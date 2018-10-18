@@ -14,14 +14,14 @@ class Minesweeper {
     private static int remaining;
     private static Boolean gameOver;
     private static Cell[][] board;
-    private static Window gui;
+    private static GUI gui;
     private static final int MAXHEIGHT = 32;
     private static final int MAXWIDTH = 64;
     private static final int MAXMINES = MAXHEIGHT*MAXWIDTH-1;
     
     public static void main (String[] args) {
         // instanciates the GUI and starts a new game
-        gui = new Window();
+        gui = new GUI();
         newBoard();
     }
     
