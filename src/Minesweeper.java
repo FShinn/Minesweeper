@@ -11,13 +11,16 @@ import java.util.Random;
  */
 
 class Minesweeper {
-    static int height = 8;
-    static int width = 8;
-    static int mines = 10;
-    static int remaining;
-    static Boolean gameOver;
-    static Cell[][] board;
-    static Window gui;
+    private static int height = 8;
+    private static int width = 8;
+    private static int mines = 10;
+    private static int remaining;
+    private static Boolean gameOver;
+    private static Cell[][] board;
+    private static Window gui;
+    private static final int MAXHEIGHT = 32;
+    private static final int MAXWIDTH = 64;
+    private static final int MAXMINES = MAXHEIGHT*MAXWIDTH-1;
     
     public static void main (String[] args) {
         // instanciates the GUI and starts a new game
@@ -25,12 +28,15 @@ class Minesweeper {
         newBoard();
     }
     
+    public static int getHeight() { return height; }
+    public static int getWidth() { return width; }
+    public static int getMines() { return mines; }
     
     public static void newBoard(int h, int w, int m) {
         // wrapper for newBoard with new properties
-        height = h; 
-        width = w; 
-        mines = m;
+        height = Math.min(Math.max(h,1),MAXHEIGHT); 
+        width = Math.min(Math.max(w,2),MAXWIDTH);
+        mines = Math.min(Math.max(m,1),MAXMINES);
         newBoard();
     }
     public static void newBoard() {
@@ -103,13 +109,11 @@ class Minesweeper {
     private static void lose() {
         // game logic for when game is lost
         gui.gameLost();
-        System.out.println("lose");
         gameOver = true;
     }
     private static void win() {
         // game logic for when game is won
         gui.gameWon();
-        System.out.println("win");
         gameOver = true;
     }
 }

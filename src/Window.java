@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.*;
 
 /* Window Class
  * 
@@ -68,7 +69,7 @@ class Window extends JFrame {
         // create and add resetbutton
         resetbutton = new JButton("R");
         resetbutton.setMargin(new Insets(0,0,0,0));
-        resetbutton.setPreferredSize(new Dimension(45,45));
+        resetbutton.setPreferredSize(new Dimension(32,32));
         resetbutton.addActionListener( // reset button functionality 
             new AbstractAction("reset") {
                 public void actionPerformed(ActionEvent e) {
@@ -84,7 +85,7 @@ class Window extends JFrame {
     private JPanel createBoardPanel() {
         // create panel
         boardpanel = new JPanel();
-        boardpanel.setBackground(Color.GRAY);
+        boardpanel.setBackground(Color.LIGHT_GRAY);
         
         // board details will be updated by Minesweeper.newGame()
         return boardpanel;
@@ -99,7 +100,7 @@ class Window extends JFrame {
         // clear board panel and change grid and size for new dimensions
         boardpanel.removeAll();
         boardpanel.setLayout(new GridLayout(height, width));
-        boardpanel.setPreferredSize(new Dimension(25*width,25*height));
+        boardpanel.setPreferredSize(new Dimension(16*width,16*height));
         
         // reset BoardButton IDs and place new buttons into board
         for (int r=0; r<height; r++) {

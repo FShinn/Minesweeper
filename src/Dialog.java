@@ -29,7 +29,7 @@ class Dialog extends JDialog {
         
         // display window
         pack();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(owner);
         setVisible(true);
     }
     
@@ -42,13 +42,18 @@ class Dialog extends JDialog {
         // params: rows, cols, hgap, vgap
         inputPanel.setLayout(new GridLayout(3, 2, 25, 7));
         
+        // create JTextFields with current board properties
+        height = new JTextField(Integer.toString(Minesweeper.getHeight()));
+        width = new JTextField(Integer.toString(Minesweeper.getWidth()));
+        mines = new JTextField(Integer.toString(Minesweeper.getMines()));
+        
         // add content
         inputPanel.add(new JLabel("Height"));
-        inputPanel.add((height = new JTextField()));
+        inputPanel.add(height);
         inputPanel.add(new JLabel("Width"));
-        inputPanel.add((width = new JTextField()));
+        inputPanel.add(width);
         inputPanel.add(new JLabel("Mines"));
-        inputPanel.add((mines = new JTextField()));
+        inputPanel.add(mines);
         
         return inputPanel;
     }
