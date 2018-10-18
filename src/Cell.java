@@ -11,11 +11,11 @@
  */
 
 class Cell {
-    Boolean revealed;
-    Boolean mine;
-    Boolean flag;
-    int adjacentMineCount;
-    BoardButton display;
+    private Boolean revealed;
+    private Boolean mine;
+    private Boolean flag;
+    private int adjacentMineCount;
+    private BoardButton display;
     
     public Cell () {
         // Constructs the cell and sets default properties
