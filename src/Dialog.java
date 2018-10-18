@@ -5,38 +5,33 @@ import javax.swing.border.*;
 
 /* Dialog Class
  * 
- * This class is for instanciating JDialog objects which serve as the board config.
+ * An instance of this class contains a JDialog object,
+ * which in turn provides board configuration options.
  * It is instanciated whenever the user selects "new..." from the options menu.
- * 
- * TODO:
- * Again, should probably by containing JDialog instead of extending it.
- *
- * Data protection
  */
 
-class Dialog extends JDialog {
-    JPanel inputPanel, confirmPanel;
-    JTextField height,width,mines;
+class Dialog {
+    private JDialog dialog;
+    private JTextField height,width,mines;
     
     public Dialog (JFrame owner) {
         // create dialog
-        super(owner, "Settings");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dialog  = new JDialog(owner, "Settings");
+        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         // add content
-        getContentPane().add(createInputPanel(),BorderLayout.CENTER);
-        getContentPane().add(createConfirmPanel(),BorderLayout.PAGE_END);
+        dialog.getContentPane().add(createInputPanel(),BorderLayout.CENTER);
+        dialog.getContentPane().add(createConfirmPanel(),BorderLayout.PAGE_END);
         
         // display window
-        pack();
-        setLocationRelativeTo(owner);
-        setVisible(true);
+        dialog.pack();
+        dialog.setLocationRelativeTo(owner);
+        dialog.setVisible(true);
     }
     
     private JPanel createInputPanel() {
         // create panel
-        inputPanel = new JPanel();
-        inputPanel.setBackground(Color.LIGHT_GRAY);
+        JPanel inputPanel = new JPanel();
         // pads the panel
         inputPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         // params: rows, cols, hgap, vgap
@@ -60,10 +55,7 @@ class Dialog extends JDialog {
     
     private JPanel createConfirmPanel() {
         // create panel
-        confirmPanel = new JPanel();
-        confirmPanel.setBackground(Color.LIGHT_GRAY);
-        
-        Dialog d = this;
+        JPanel confirmPanel = new JPanel();
         
         // create and add confirmbutton
         JButton confirmbutton = new JButton("OK");
@@ -75,7 +67,7 @@ class Dialog extends JDialog {
                     int w = Integer.parseInt(width.getText());
                     int m = Integer.parseInt(mines.getText());
                     Minesweeper.newBoard(h,w,m);
-                    d.dispose();
+                    dialog.dispose();
                 }
             }
         );
@@ -87,7 +79,7 @@ class Dialog extends JDialog {
         cancelbutton.addActionListener(
             new AbstractAction("Cancel") {
                 public void actionPerformed(ActionEvent e) {
-                    d.dispose();
+                    dialog.dispose();
                 }
             }
         );
